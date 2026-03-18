@@ -1,10 +1,10 @@
+import { configureStore } from "@reduxjs/toolkit";
 import bindListeners from "./listeners";
-import configuration from "./configuration";
-import { createStore } from "redux";
+import reducers from "./reducers";
 
-const [reducers, enhancers] = configuration;
-
-const store = createStore(reducers, enhancers);
+const store = configureStore({
+  reducer: reducers,
+});
 
 bindListeners(store);
 
