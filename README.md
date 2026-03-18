@@ -44,15 +44,9 @@ A full-stack application template using React for the frontend and Express for t
     ```sh
     git clone https://github.com/MrNoDrop/react-express-vite.git
     ```
-2.  Install backend dependencies:
+2.  Install dependencies for both client and server from the root directory:
     ```sh
-    cd server
-    npm install
-    ```
-3.  Install frontend dependencies:
-    ```sh
-    cd ../client
-    npm install
+    npm run install
     ```
 
 ### Environment Variables
@@ -73,16 +67,14 @@ The Vite frontend natively supports environment variables out of the box. You ca
 1.  Start the backend development server:
 
     ```sh
-    cd server
-    npm run dev
+    npm run server-dev
     ```
 
     The server will be running on `http://localhost:3000`.
 
 2.  Start the frontend development server:
     ```sh
-    cd client
-    npm run dev
+    npm run client-dev
     ```
     The client will be running on `http://localhost:5173`.
 
@@ -289,17 +281,15 @@ export default MyComponent;
 
 ## Available Scripts
 
-### Client
+The root `package.json` contains scripts so you don't have to constantly go back and forward between the `client` and `server` folders. Run these from the main directory:
 
-- `npm run dev`: Starts the Vite development server.
-- `npm run build`: Builds the application for production.
-- `npm run lint`: Lints the source code.
-- `npm run preview`: Starts a local server to preview the production build.
-
-### Server
-
-- `npm run start`: Starts the server in production mode.
-- `npm run dev`: Starts the server in development mode with nodemon.
+- `npm run install`: Installs dependencies for both the client and server.
+- `npm run client-dev`: Starts the Vite development server for the frontend.
+- `npm run client-build`: Builds the frontend application for production.
+- `npm run client-lint`: Runs the linter for the frontend source code.
+- `npm run client-preview`: Starts a local server to preview the frontend production build.
+- `npm run server-dev`: Starts the Express server in development mode with nodemon.
+- `npm run server-start`: Starts the Express server in production mode.
 
 ## Deployment
 
@@ -308,15 +298,13 @@ To deploy the application, you need to build the client and then start the serve
 1.  Build the client:
 
     ```sh
-    cd client
-    npm run build
+    npm run client-build
     ```
 
     This will create a `dist` directory with the production-ready files.
 
 2.  The Express server is already configured to serve the static files from the `client/dist` directory. You can start the server in production mode:
     ```sh
-    cd server
-    npm run start
+    npm run server-start
     ```
     The application will be available at the server's address (e.g., `http://localhost:3000`).
