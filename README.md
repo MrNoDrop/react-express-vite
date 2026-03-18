@@ -81,10 +81,13 @@ A full-stack application template using React for the frontend and Express for t
 │   ├── public/
 │   ├── src/
 │   │   ├── components/
+│   │   ├── core/
 │   │   ├── paths/
 │   │   ├── store/
+│   │   ├── tools/
 │   │   ├── App.jsx
 │   │   └── index.jsx
+│   ├── index.html
 │   ├── package.json
 │   └── vite.config.js
 └── server/         # Backend Express application
