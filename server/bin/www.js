@@ -4,14 +4,18 @@
  * Module dependencies.
  */
 
+import "dotenv/config";
 import app from "../app.js";
+import debugLib from "debug";
 import http from "http";
 import ip from "ip";
+import { connectDB } from "../db.js";
+
+const debug = debugLib("server:server");
 
 /**
  * Get port from environment and store in Express.
  */
-const debug = debuger("server:server");
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
@@ -25,9 +29,11 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
+connectDB().then(() => {
+  server.listen(port);
+  server.on("error", onError);
+  server.on("listening", onListening);
+});
 
 /**
  * Normalize a port into a number, string, or false.

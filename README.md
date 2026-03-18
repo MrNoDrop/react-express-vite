@@ -55,6 +55,19 @@ A full-stack application template using React for the frontend and Express for t
     npm install
     ```
 
+### Environment Variables
+
+To configure environment-specific settings (like ports, database URIs, or secret keys):
+
+1.  In the `server` directory, create a `.env` file based on the example:
+    ```sh
+    cd server
+    cp .env.example .env
+    ```
+2.  Update the variables inside `server/.env` as needed.
+
+The Vite frontend natively supports environment variables out of the box. You can create a `.env` file in the `client` directory. Any variables that need to be accessible in your React code must be prefixed with `VITE_` (e.g., `VITE_API_URL`).
+
 ### Development
 
 1.  Start the backend development server:
@@ -82,6 +95,7 @@ A full-stack application template using React for the frontend and Express for t
 │   ├── src/
 │   │   ├── components/
 │   │   ├── core/
+│   │   │   └── api.js      # Standardized fetch utility wrapper
 │   │   ├── paths/
 │   │   ├── store/
 │   │   ├── tools/
@@ -89,13 +103,31 @@ A full-stack application template using React for the frontend and Express for t
 │   │   └── index.jsx
 │   ├── index.html
 │   ├── package.json
+│   ├── .env.example
 │   └── vite.config.js
 └── server/         # Backend Express application
     ├── bin/
     │   └── www.js
     ├── routes/
+    ├── .env.example
+    ├── db.js           # Database connection logic
     ├── app.js
     └── package.json
+```
+
+### Database Setup
+
+The backend includes a boilerplate database connection file at `server/db.js`. It ensures the database (e.g., MongoDB, PostgreSQL) is connected via the `DATABASE_URL` environment variable before the server starts accepting HTTP requests.
+
+### API Requests
+
+A standardized fetch utility is provided for the frontend in `client/src/core/api.js`. It automatically hooks into `VITE_API_URL` (or the Vite dev proxy).
+
+```javascript
+import { apiFetch } from "./core/api";
+
+// Automatically hits /api/users in dev, or VITE_API_URL/users in prod
+apiFetch("/users", { method: "GET" }).then((data) => console.log(data));
 ```
 
 ## State Management with Redux
