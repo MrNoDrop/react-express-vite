@@ -83,8 +83,8 @@ A full-stack application template using React for the frontend and Express for t
 │   │   ├── components/
 │   │   ├── paths/
 │   │   ├── store/
-│   │   ├── App.js
-│   │   └── index.js
+│   │   ├── App.jsx
+│   │   └── index.jsx
 │   ├── package.json
 │   └── vite.config.js
 └── server/         # Backend Express application
@@ -124,7 +124,7 @@ To deploy the application, you need to build the client and then start the serve
 
 2.  The Express server is already configured to serve the static files from the `client/dist` directory. You can start the server in production mode:
     `sh
-    cd server
-    npm run start
-    `
+cd server
+npm run start
+`
     The application will be available at the server's address (e.g., `http://localhost:3000`).
