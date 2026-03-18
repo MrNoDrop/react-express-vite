@@ -1,4 +1,4 @@
-import { browserHistory } from "../../configuration.js";
+import { browserHistory } from "../../../browserHistory.js";
 
 export default (store) => {
   // Dispatch the current location on startup
