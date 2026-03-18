@@ -180,6 +180,38 @@ Listeners are functions that are executed when the store's state changes. They a
     };
     ```
 
+### Forcing Re-renders with `updateTick`
+
+The `updateTick` state property is a simple counter that increments periodically. While generally you should rely on changes to props and state to trigger re-renders in your components, `updateTick` provides a mechanism to force a re-render when needed. This can be particularly useful for scenarios where you need to re-evaluate a `useEffect` hook based on a time interval or to manually trigger an update.
+
+**Example: Using `updateTick` in `useEffect`**
+
+Imagine you have a component that needs to perform an action on a regular interval. You can use `updateTick` in the dependency array of a `useEffect` hook to trigger the effect whenever the tick updates.
+
+```javascript
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+const MyComponent = () => {
+  const updateTick = useSelector((state) => state.state.updateTick);
+
+  useEffect(() => {
+    // This effect will run every time updateTick changes,
+    // which happens on a regular interval.
+    console.log("Component re-rendered due to updateTick:", updateTick);
+
+    // You can add any logic here that needs to be re-evaluated,
+    // such as fetching data or updating the component's state.
+  }, [updateTick]);
+
+  return <div>My Component</div>;
+};
+
+export default MyComponent;
+```
+
+**Caution:** Forcing re-renders should be used sparingly. Always consider if there's a more declarative, state-driven way to achieve your goal. However, `updateTick` is a useful tool for cases where a periodic or manual re-render is the most straightforward solution.
+
 ## Available Scripts
 
 ### Client
