@@ -5,6 +5,7 @@
     "client-lint": "cd client && npm run lint",
     "client-preview": "cd client && npm run preview",
     "server-dev": "cd server && npm run dev",
-    "server-start": "cd server && npm run start"
+    "server-start": "cd server && npm run start",
+    "install": "cd client && npm install && cd ../server && npm install"
   }
 }
