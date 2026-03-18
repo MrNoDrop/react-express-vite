@@ -1,6 +1,17 @@
-import { startListener } from "redux-first-routing";
-import { browserHistory } from "../../configuration";
+import { browserHistory } from "../../configuration.js";
 
-export default store => {
-  startListener(browserHistory, store);
+export default (store) => {
+  // Dispatch the current location on startup
+  store.dispatch({
+    type: "ROUTER/LOCATION_CHANGE",
+    payload: browserHistory.location,
+  });
+
+  // Listen for future changes
+  browserHistory.listen(({ location }) => {
+    store.dispatch({
+      type: "ROUTER/LOCATION_CHANGE",
+      payload: location,
+    });
+  });
 };

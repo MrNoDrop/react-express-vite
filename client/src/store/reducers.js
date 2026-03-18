@@ -3,10 +3,11 @@ import { combineReducers } from "redux";
 import initialStateJSON from "./initial.state.json";
 
 export const initialState = initialStateJSON.state;
+export const initialRouterState = initialStateJSON.router;
 
 export const stateReducer = (
   state = initialState,
-  { type: currentAction, payload }
+  { type: currentAction, payload },
 ) => {
   for (let action of actions) {
     if (action.match(currentAction)) {
@@ -18,11 +19,11 @@ export const stateReducer = (
   return state;
 };
 
-export const initialRouterState = initialStateJSON.router;
-
 export const routerReducer = (
-  router = initialRouterState,
-  { type: action, payload }
-) => (action === "ROUTER/LOCATION_CHANGE" ? { ...router, ...payload } : router);
+  state = initialRouterState,
+  { type: action, payload },
+) => {
+  return action === "ROUTER/LOCATION_CHANGE" ? { ...state, ...payload } : state;
+};
 
 export default combineReducers({ state: stateReducer, router: routerReducer });
