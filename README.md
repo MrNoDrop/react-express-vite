@@ -7,7 +7,7 @@ A full-stack application template using React for the frontend and Express for t
 - **Modern Frontend:** Powered by React 18 and Vite for a fast and efficient development experience.
 - **Robust Backend:** Built with Express.js, a minimal and flexible Node.js web application framework.
 - **ES Modules:** The entire backend is written using ES modules, the modern standard for JavaScript.
-- **State Management:** Includes Redux for predictable state management.
+- **State Management:** Includes Redux for predictable state management, with a clear and scalable structure for actions and listeners.
 - **Routing:** Uses React Router v6 for declarative routing.
 - **Linting:** Includes a modern ESLint and Prettier configuration to enforce code style and catch errors.
 
@@ -95,6 +95,91 @@ A full-stack application template using React for the frontend and Express for t
     └── package.json
 ```
 
+## State Management with Redux
+
+This template uses Redux for state management, with a specific structure for actions and listeners.
+
+### Store Actions
+
+Actions are events that send data from your application to your Redux store. They are plain JavaScript objects and are the only source of information for the store.
+
+**Creating a new action:**
+
+1.  **Define the action type:** In `client/src/store/actions/types.js`, add a new export for your action type. This should be a constant string.
+
+    ```javascript
+    // client/src/store/actions/types.js
+    export const MY_NEW_ACTION = "MY_NEW_ACTION";
+
+    export default [
+      // ...other actions
+      MY_NEW_ACTION,
+    ];
+    ```
+
+2.  **Create the action creator:** In the `client/src/store/actions/` directory, create a new file for your action (e.g., `myNewAction.js`). This file will export a function that returns the action object.
+
+    ```javascript
+    // client/src/store/actions/myNewAction.js
+    import { MY_NEW_ACTION } from "./types";
+
+    export default (payload) => ({
+      type: MY_NEW_ACTION,
+      payload: payload,
+    });
+    ```
+
+### Store Listeners
+
+Listeners are functions that are executed when the store's state changes. They are useful for triggering side effects, such as API calls or other asynchronous operations.
+
+**Creating a new listener:**
+
+1.  **Create the listener file:** In the `client/src/store/listeners/listener/` directory, create a new file for your listener (e.g., `myNewListener.js`). This file will export a function that takes the store as an argument.
+
+    ```javascript
+    // client/src/store/listeners/listener/myNewListener.js
+    import myNewAction from "../../actions/myNewAction";
+
+    export default ({ getState, dispatch }) => {
+      const {
+        state: { someValue },
+      } = getState();
+
+      if (someValue === "some condition") {
+        dispatch(myNewAction({ newValue: "new value" }));
+      }
+    };
+    ```
+
+2.  **Bind the listener:** In `client/src/store/listeners/index.js`, import your new listener and call it within the exported function.
+
+    ```javascript
+    // client/src/store/listeners/index.js
+    import bindMyNewListener from "./listener/myNewListener";
+    // ...other imports
+
+    export default (store) => {
+      // ...other listeners
+      bindMyNewListener(store);
+    };
+    ```
+
+    You can also use a `setInterval` loop to run a listener at a specific interval:
+
+    ```javascript
+    // client/src/store/listeners/index.js
+    // ...
+    const loop = setInterval;
+
+    export default (store) => {
+      // ...
+      loop(() => {
+        bindMyNewListener(store);
+      }, 1000); // Run every second
+    };
+    ```
+
 ## Available Scripts
 
 ### Client
@@ -123,8 +208,8 @@ To deploy the application, you need to build the client and then start the serve
     This will create a `dist` directory with the production-ready files.
 
 2.  The Express server is already configured to serve the static files from the `client/dist` directory. You can start the server in production mode:
-    `sh
-cd server
-npm run start
-`
+    ```sh
+    cd server
+    npm run start
+    ```
     The application will be available at the server's address (e.g., `http://localhost:3000`).
