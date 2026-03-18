@@ -92,27 +92,67 @@ The Vite frontend natively supports environment variables out of the box. You ca
 .
 ├── client/         # Frontend React application
 │   ├── public/
+│   │   ├── favicon.ico
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
 │   ├── src/
 │   │   ├── components/
+│   │   │   └── menu.jsx
 │   │   ├── core/
-│   │   │   └── api.js      # Standardized fetch utility wrapper
+│   │   │   ├── api.js      # Standardized fetch utility wrapper
+│   │   │   ├── browserHistory.js
+│   │   │   ├── reportWebVitals.js
+│   │   │   └── setupTests.js
 │   │   ├── paths/
+│   │   │   ├── path/
+│   │   │   │   └── landingPage.js
+│   │   │   └── paths.jsx
 │   │   ├── store/
+│   │   │   ├── actions/
+│   │   │   │   ├── window/
+│   │   │   │   │   └── resized.js
+│   │   │   │   ├── types.js
+│   │   │   │   └── updateTick.js
+│   │   │   ├── listeners/
+│   │   │   |   ├──  listener/
+│   │   │   │   │   ├── authentication/
+│   │   │   │   │   │   ├── fingerprint.js
+│   │   │   │   │   │   └── token.js
+│   │   │   │   │   ├── history.js
+│   │   │   │   │   ├── updateTick.js
+│   │   │   │   │   └── window.js
+│   │   │   │   └── index.js
+│   │   │   ├── index.js
+│   │   │   ├── initial.state.json
+│   │   │   └── reducers.js
 │   │   ├── tools/
+│   │   │   ├── getBoundingClientRect.js
+│   │   │   └── vScale.js
 │   │   ├── App.jsx
+│   │   ├── App.scss
+│   │   ├── App.test.jsx
+│   │   ├── index.css
 │   │   └── index.jsx
-│   ├── index.html
-│   ├── package.json
 │   ├── .env.example
+│   └── index.html
+│   ├── package-lock.json
 │   └── vite.config.js
-└── server/         # Backend Express application
-    ├── bin/
-    │   └── www.js
-    ├── routes/
-    ├── .env.example
-    ├── db.js           # Database connection logic
-    ├── app.js
-    └── package.json
+├── server/         # Backend Express application
+|   ├── bin/
+|   │   └── www.js
+|   ├── routes/
+|   │   └── index.js
+|   ├── .env.example
+|   ├── app.js
+|   ├── db.js           # Database connection logic
+|   ├── package-lock.json
+|   └── package.json
+├── .gitignore
+├── LICENSE
+├── package.json
+└── README.md
 ```
 
 ### Database Setup
