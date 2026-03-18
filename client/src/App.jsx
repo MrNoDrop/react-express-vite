@@ -3,7 +3,7 @@ import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Menu from "./components/menu.jsx";
 import Paths from "./paths/paths.jsx";
-import { browserHistory } from "./browserHistory.js";
+import { browserHistory } from "./core/browserHistory.js";
 import store from "./store";
 import "./App.scss";
 
