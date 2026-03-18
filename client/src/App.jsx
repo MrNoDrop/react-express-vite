@@ -10,7 +10,13 @@ import "./App.scss";
 function App() {
   return (
     <Provider store={store}>
-      <HistoryRouter history={browserHistory}>
+      <HistoryRouter
+        history={browserHistory}
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <Menu />
         <Paths />
       </HistoryRouter>
