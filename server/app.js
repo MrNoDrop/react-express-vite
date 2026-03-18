@@ -7,7 +7,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import indexRouter from "./routes/index.js";
-import usersRouter from "./routes/users.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,7 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 // React Router fallback for Single Page Applications
 app.get("*", (req, res) => {
